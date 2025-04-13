@@ -13,9 +13,17 @@
 <script>
   // Ottieni il parametro 'phone' dall'URL
   const params = new URLSearchParams(window.location.search);
-  const phoneNumber = params.get('phone');
+  let phoneNumber = params.get('phone');
 
   console.log("Parametro 'phone' ricevuto:", phoneNumber);
+
+  // Rimuovi eventuali spazi e aggiungi il prefisso '+' se manca
+  if (phoneNumber) {
+    phoneNumber = phoneNumber.trim();
+    if (!phoneNumber.startsWith('+')) {
+      phoneNumber = '+' + phoneNumber;
+    }
+  }
 
   if (!phoneNumber || !phoneNumber.startsWith('+')) {
     document.body.innerHTML = "<h1>Errore: Parametro 'phone' mancante o non valido.</h1>";
